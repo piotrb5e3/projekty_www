@@ -1,5 +1,15 @@
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 body {
     background-color: #F1EEE5;
+    font-family: Tahoma,Verdana,Helvetica,sans-serif;
 }
 
 .bold {
@@ -12,13 +22,20 @@ body {
 
 }
 
+.count {
+    width: 60px;
+    margin-left: 47px;
+    float: left;
+}
+
+.dark{
+    background-color: #dedcd0;
+}
 .font11 {
-    font-family: Tahoma,Verdana,Helvetica,sans-serif;
     font-size: 11px;
 }
 
 .font17 {
-    font-family: Tahoma,Verdana,Helvetica,sans-serif;
     font-size: 17px;
    
 }
@@ -35,7 +52,7 @@ header {
 main {
     background-color: #f9f8f3;
     width: 100%;
-    height: 300px;
+    height: 1280px;
 }
 
 #mapbox {
@@ -45,7 +62,6 @@ main {
     border: solid #d3d2cd;
     border-width: 1px 1px 1px 0px;
     background-color: #ffffff;
-
 }
 
 #navlist {
@@ -83,10 +99,21 @@ main {
 }
 
 #panel_final {
+    margin-top: 45px;
     width: 370px;
-    height: 174px;
+    height: 164px;
     float: left;
-    background-color: #e7e7de
+    background-color: #e7e7de;
+    border: 1px solid #d3d2cd;
+    margin-left:20px;
+    padding: 5px 5px;
+}
+
+#panel_final p {
+    font-size: 17px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
 #panel_seemore {
@@ -107,12 +134,23 @@ main {
     list-style-image: url("bullet.png");
 }
 
+#panel_seemore li {
+    margin-top: 7px;
+}
+
 #panel_w_map {
     border: 1px solid #d3d2cd;
     background-color: #e7e7de;
     width: 563px;
     height: 427px;
     float: left;
+}
+
+.percent {
+    width:65px;
+    margin-left: 7px;
+    float:left;
+
 }
 
 #polska {
@@ -142,6 +180,20 @@ main {
     text-decoration: underline;
 }
 
+.ruler {
+    border: 1px solid #bdbdb5;
+    width: 159px;
+    height: 15px;
+    float:left;
+    padding: 2px;
+    background: url("bar.png") no-repeat 0px 0px;
+}
+
+.score-holder {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 30px;
+}
 
 #statbox {
     border: solid #d3d2cd;
@@ -161,6 +213,19 @@ main {
     padding: 3px;
 }
 
-.dark{
-    background-color: #dedcd0;
+#strip {
+    margin: 6px 0px;
+    background-color: #ffffff;
+    width: 100%;
+    height: 40px;
+}
+
+#strip-text {
+    height: 24px;
+    padding: 8px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #a90414;
+    float: left;
+    font-weight: bold;
 }
