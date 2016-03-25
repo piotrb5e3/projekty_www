@@ -2,15 +2,50 @@ body {
     background-color: #F1EEE5;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 #container {
     width: 989px;
     margin: auto;
 
 }
 
+.font11 {
+    font-family: Tahoma,Verdana,Helvetica,sans-serif;
+    font-size: 11px;
+}
+
+.font17 {
+    font-family: Tahoma,Verdana,Helvetica,sans-serif;
+    font-size: 17px;
+   
+}
+
 header {
     height: 130px;
     background-color: rgb(118, 128, 141);
+}
+
+.lightgreyborder {
+    border: 1px solid rgb(128,128,128);   
+}
+
+main {
+    background-color: #f9f8f3;
+    width: 100%;
+    height: 300px;
+}
+
+#mapbox {
+    float: left;
+    width:328px;
+    height:293px;
+    border: solid #d3d2cd;
+    border-width: 1px 1px 1px 0px;
+    background-color: #ffffff;
+
 }
 
 #navlist {
@@ -19,7 +54,6 @@ header {
     border-color: gray;
     border-style: solid;
     border-width: 1px;
-    //display: block !important;
     list-style: none;
     margin: 0px;
     padding: 0px;
@@ -48,14 +82,85 @@ header {
     color: rgb(220,0,0);
 }
 
-main {
+#panel_final {
+    width: 370px;
+    height: 174px;
+    float: left;
+    background-color: #e7e7de
+}
+
+#panel_seemore {
+    width: 350px;
+    height: 198px;
+    background-color: #dbdcde;
+    float: left;
+    padding: 5px 15px;
+    margin-left:20px;
+}
+
+#panel_seemore p {
+    margin:0px;
+}
+
+#panel_seemore ul {
+    padding-left: 15px;
+    list-style-image: url("bullet.png");
+}
+
+#panel_w_map {
+    border: 1px solid #d3d2cd;
+    background-color: #e7e7de;
+    width: 563px;
+    height: 427px;
+    float: left;
+}
+
+#polska {
     background-color: #f9f8f3;
+    padding: 1px;
+    margin:0px;
+    width:232px;
+    height: 49px;
+    position:relative;
+}
+
+#polska a {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000000;
+    height: 20px;
+    width: 100px;
+    position:absolute;
+    top: 50%;
+    margin-top: -10px;
+    left: 50%;
+    margin-left: -50px;
+}
+
+#polska a:hover {
+    text-decoration: underline;
+}
+
+
+#statbox {
+    border: solid #d3d2cd;
+    border-width: 1px 0px 1px 0px;
+    width: 234px;
+    height: 293px;
+    float: left;
+}
+
+#statbox table {
     width: 100%;
-    height: 300px;
+    height: 242px;
 }
 
-.lightgreyborder {
-    border: 1px solid rgb(128,128,128);   
+#statbox td {
+    border-top:1px solid #fbf8f3;
+    padding: 3px;
 }
 
-
+.dark{
+    background-color: #dedcd0;
+}
