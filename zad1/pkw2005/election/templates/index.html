@@ -1,17 +1,18 @@
+{% load staticfiles %}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <title>Wybory 2005</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link href="style.css" rel="stylesheet" type="text/css">
+        <link href="{% static "style.css" %}" rel="stylesheet" type="text/css">
 
     </head>
 
     <body>
         <div id="container">
             <header>
-                <img src="header.png" alt=""/>
+                <img src="{% static "header.png" %}" alt=""/>
             </header>
             <nav>
                 <ul id="navlist" class="font11">
@@ -40,7 +41,7 @@
                     </p>
                     <div>
                         <div id = "mapbox">
-                            <img src = "map.png" />
+                            <img src = "{% static "map.png" %}" />
                         </div>
                         <div id = "statbox">
                             <p class="font17" id="polska">
@@ -75,22 +76,22 @@
                                 <tr><td>
                                         Liczba uprawnionych:
                                     </td><td class="bold">
-                                        ###
+                                        {{ razemUprawnionych }}
                                     </td></tr>
                                 <tr><td>
                                         Liczba wydanych kart:
                                     </td><td class="bold">
-                                        ###
+                                        {{ razemWydanychKart }}
                                     </td></tr>
                                 <tr><td>
                                          Liczba głosów oddanych
                                     </td><td class="bold">
-                                        ###
+                                        {{ razemGlosowOddanych }}
                                     </td></tr>
                                 <tr><td>
                                          Liczba głosów ważnych
                                     </td><td class="bold">
-                                        ###
+                                        {{ razemGlosowWaznych }}
                                     </td></tr>
                             </table>
                         </div>
@@ -142,37 +143,37 @@
                         Szczegółowe wyniki głosowania na kandydatów:
                     </p>
                     <ul>
-                        <li><a href="###">KACZYŃSKI Lech Aleksander</a></li>
-                        <li><a href="###">TUSK Donald Franciszek</a></li>
+                        <li><a href="###">{{ kand1Nazwa }}</a></li>
+                        <li><a href="###">{{ kand2Nazwa }}</a></li>
                     </ul>
                 </div>
                 <div id="panel_final">
                     <p class="bold">
-                    <a href="###" >KACZYŃSKI Lech Aleksander</a>
+                    <a href="###" >{{ kand1Nazwa }}</a>
                     </p>
                     <div class="score-holder">
                         <div class="ruler">
-                            <div class="candidate1" style="width: 30%;" > </div>
+                            <div class="candidate1" style="width: {{ kand1p }}%;" > </div>
                         </div>
                         <div class="percent">
-                            ##.##%
+                            {{ kand1p }}%
                         </div>
                         <div class="count">
-                            #######
+                            {{kand1g }}
                         </div>
                     </div>
                     <p class="bold">
-                    <a href="###" >TUSK Donald Franciszek</a>
+                    <a href="###" >{{ kand2Nazwa }}</a>
                     </p>
                     <div class="score-holder">
                         <div class="ruler">
-                            <div class="candidate2" style="width: 70%" > </div>
+                            <div class="candidate2" style="width: {{ kand2p }}%" > </div>
                         </div>
                         <div class="percent">
-                            ##.##%
+                            {{ kand2p }}%
                         </div>
                         <div class="count">
-                            #######
+                            {{ kand2g }}
                         </div>
                     </div>
                 </div>
@@ -192,7 +193,7 @@
                                 Liczba głosów ważnych
                             </th>
                             <th colspan="2">
-                                KACZYŃSKI Lech Aleksander
+                                {{ kand1Nazwa }}
                             </th>
                             <th width=320 rowspan="3">
                                 Liczba głosów:<br>
@@ -200,7 +201,7 @@
                                 [%]
                             </th>
                             <th colspan="2">
-                                TUSK Donald Franciszek
+                                {{ kand2Nazwa }}
                             </th>
                         </tr>
                         <tr>
@@ -225,40 +226,209 @@
                                 liczba
                             </th>
                         </tr>
+                        {% for w in wojewodztwa %}
                         <tr>
                             <td>
-                                010000
+                                {{ w.numer }}
                             </td>
                             <td>
-                                mazowieckie, woj
+                                {{ w.nazwa }}
                             </td>
                             <td>
-                                #######
+                                {{ w.glosowWaznych }}
                             </td>
                             <td>
-                                ######
+                                {{ w.glosowKand1 }}
                             </td>
                             <td>
-                                ##.##
+                                {% if w.glosowWaznych > 0 %}
+                                    {{ w.procKand1 }}
+                                {% else %}
+                                    --.--
+                                {% endif %}
                             </td>
                             <td class="tableruler">
+                                {% if w.glosowWaznych > 0 %}
                                 <div>
-                                    <div style="width: 30%;">
+                                    <div style="width: {{ w.procKand1 }}%;">
                                     </div>
                                 </div>
+                                {% endif %}
                             </td>
                             <td>
-                                ##.##
+                                {% if w.glosowWaznych > 0 %}
+                                    {{ w.procKand2 }}
+                                {% else %}
+                                    --.--
+                                {% endif %}
                             </td>
                             <td>
-                                ######
+                                {{ w.glosowKand2 }}
                             </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <th>
+                                Σ
+                            </th>
+                            <th>
+                                Polska
+                            </th>
+                            <th>
+                                {{ razemGlosowWaznych }}
+                            </th>
+                            <th>
+                                {{ kand1g }}
+                            </th>
+                            <th>
+                                {{ kand1p }}
+                            </th>
+                            <th class="tableruler">
+                                {% if razemGlosowWaznych > 0 %}
+                                <div>
+                                    <div style="width: {{ kand1p }}%;">
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ kand2p }}
+                            </th>
+                            <th>
+                                {{kand2g }}
+                            </th>
+                        </tr>
                     </table>
                 </div>
                 <div class="panel_table">
                     <p class="font11 miniheader">
                         Porównanie wyników głosowania na kandydatów w zależności od siedziby komisji obwodowej
                     </p>
+                    <table class="font11 statmaintable">
+                        <tr>
+                            <th rowspan="3">
+                                Podział
+                            </th>
+                            <th width=90 rowspan="3">
+                                Liczba głosów ważnych
+                            </th>
+                            <th colspan="2">
+                                {{ kand1Nazwa }}
+                            </th>
+                            <th width=320 rowspan="3">
+                                Liczba głosów:<br>
+                                na kandydata / ważnych<br>
+                                [%]
+                            </th>
+                            <th colspan="2">
+                                {{ kand2Nazwa }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">
+                                głosów na kandydata
+                            </th>
+                            <th colspan="2">
+                                głosów na kandydata
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                liczba
+                            </th>
+                            <th>
+                                %
+                            </th>
+                            <th>
+                                %
+                            </th>
+                            <th>
+                                liczba
+                            </th>
+                        </tr>
+                        {% for r in listaRodzajow %}
+                        <tr>
+                            <td>
+                                {{ r.nazwa }}
+                            </td>
+                            <td>
+                                {{ r.glosowWaznych }}
+                            </td>
+                            <td>
+                                {{ r.glosowKand1 }}
+                            </td>
+                            <td>
+                                {% if r.glosowWaznych > 0 %}
+                                    {{ r.procKand1 }}
+                                {% else %}
+                                    --.--
+                                {% endif %}
+                            </td>
+                            <td class="tableruler">
+                                {% if r.glosowWaznych > 0 %}
+                                <div>
+                                    <div style="width: {{ r.procKand1 }}%;">
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if r.glosowWaznych > 0 %}
+                                    {{ r.procKand2 }}
+                                {% else %}
+                                    --.--
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ r.glosowKand2 }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="7" style="padding-left: 20px;">
+                                Porównanie wyników głosowania na kandydatów w zależności od liczby mieszkańców gminy
+                            </td>
+                        </tr>
+                        {% for r in rozmiary %}
+                        <tr>
+                            <td>
+                                {{ r.nazwa }}
+                            </td>
+                            <td>
+                                {{ r.waz }}
+                            </td>
+                            <td>
+                                {{ r.k1 }}
+                            </td>
+                            <td>
+                                {% if r.waz > 0 %}
+                                    {{ r.p1 }}
+                                {% else %}
+                                    --.--
+                                {% endif %}
+                            </td>
+                            <td class="tableruler">
+                                {% if r.waz > 0 %}
+                                <div>
+                                    <div style="width: {{ r.p1 }}%;">
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if r.waz > 0 %}
+                                    {{ r.p2 }}
+                                {% else %}
+                                    --.--
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ r.k2 }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
                 </div>
             </main>
             <footer>
