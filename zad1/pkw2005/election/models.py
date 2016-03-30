@@ -39,6 +39,7 @@ class Wojewodztwo(models.Model):
 
     numer = models.IntegerField(primary_key=True)
     nazwa = models.CharField(max_length = 100, unique = True)
+    hckey = models.CharField(max_length = 15)
 
 class Kandydat(models.Model):
 
