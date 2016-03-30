@@ -108,6 +108,9 @@ class Gmina(models.Model):
                 self.liczbaGlosowWaznych):
             raise ValidationError(
                     "Zgubione głosy ważne!") 
+        if(self.liczbaGlosowKand1 < 0 or self.liczbaGlosowKand2 <0):
+            raise ValidationError(
+                    "Liczba głosów oddanych na kandydata nie może być ujemna!")
 
 
     nazwa = models.CharField(max_length = 200, unique = True)
