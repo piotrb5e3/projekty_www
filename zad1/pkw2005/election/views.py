@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Gmina, Kandydat, RodzajGminy, Wojewodztwo
 
 
@@ -90,8 +90,8 @@ def index(request):
     razemWyd = sum(g.liczbaWydanychKart for g in listaGmin)
     razemOdd = sum(g.liczbaGlosowOddanych for g in listaGmin)
     razemWaz = sum(g.liczbaGlosowWaznych for g in listaGmin)
-    kand1 = Kandydat.objects.get(numer = 1)
-    kand2 = Kandydat.objects.get(numer = 2)
+    kand1 = get_object_or_404(Kandydat, numer = 1)
+    kand2 = get_object_or_404(Kandydat, numer = 2)
     kand1g = sum(g.liczbaGlosowKand1 for g in listaGmin)
     kand2g = sum(g.liczbaGlosowKand2 for g in listaGmin)
     if (razemWaz > 0):

@@ -65,12 +65,12 @@
     main {
         background-color: #f9f8f3;
         width: 100%;
-        height: 1280px;
+        height: 1335px;
     }
 
     #mapbox {
         float: left;
-        width:328px;
+        width:327px;
         height:293px;
         border: solid #d3d2cd;
         border-width: 1px 1px 1px 0px;
@@ -259,7 +259,7 @@
     #statbox {
         border: solid #d3d2cd;
         border-width: 1px 0px 1px 0px;
-        width: 234px;
+        width: 235px;
         height: 293px;
         float: left;
     }
@@ -397,7 +397,7 @@
 }
 
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 1000px) {
     #container {
         width: 600px !important;
     }
@@ -442,6 +442,14 @@
     }
 
     #statbox {
-        width: 251px !important;
+        width: 242px !important;
+    }
+
+    #mapbox {
+        width: 337px !important;
+    }
+
+    main {
+        height: 1720px !important;
     }
 }
