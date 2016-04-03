@@ -182,9 +182,9 @@
 
     #polska {
         background-color: #f9f8f3;
-        padding: 1px;
+        padding: 0px;
         margin:0px;
-        width:232px;
+        width: 100%;
         height: 49px;
         position:relative;
     }
@@ -394,4 +394,54 @@
         display: none; 
     }
 
+}
+
+
+@media screen and (max-width: 990px) {
+    #container {
+        width: 600px !important;
+    }
+
+    nav, header, footer {
+        display: none;
+    }
+
+    #panel_w_map, #panel_seemore, #panel_final, .panel_table {
+        margin: 10px auto !important;
+        float: none;
+    }
+
+    #panel_w_map {
+        width:  580px !important;
+    }
+
+    #panel_seemore {
+        width:  550px !important;
+    }
+
+    #panel_final {
+        width:  570px !important;
+    }
+
+    .panel_table {
+        width: 580px !important;
+    }
+
+    .tablerulerhead, .tableruler {
+        display: none;
+    }
+
+    .statmaintable {
+        width: 582px !important;
+    }
+
+    .score-holder {
+        margin-left: auto;
+        margin-right: auto;
+        width: 350px !important;
+    }
+
+    #statbox {
+        width: 251px !important;
+    }
 }
