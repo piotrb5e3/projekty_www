@@ -113,14 +113,14 @@ class Gmina(models.Model):
                     "Liczba głosów oddanych na kandydata nie może być ujemna!")
 
 
-    nazwa = models.CharField(max_length = 200, unique = True)
+    nazwa = models.CharField(max_length = 200, unique = False)
     rodzaj = models.ForeignKey(RodzajGminy, on_delete=models.CASCADE)
     wojewodztwo = models.ForeignKey(Wojewodztwo, blank = True, null = True)
-    liczbaMieszkancow = models.IntegerField()
-    liczbaUprawnionych = models.IntegerField()
-    liczbaWydanychKart = models.IntegerField()
-    liczbaGlosowOddanych = models.IntegerField()
-    liczbaGlosowWaznych = models.IntegerField()
-    liczbaGlosowKand1 = models.IntegerField()
-    liczbaGlosowKand2 = models.IntegerField()
+    liczbaMieszkancow = models.IntegerField(default=0)
+    liczbaUprawnionych = models.IntegerField(default=0)
+    liczbaWydanychKart = models.IntegerField(default=0)
+    liczbaGlosowOddanych = models.IntegerField(default=0)
+    liczbaGlosowWaznych = models.IntegerField(default=0)
+    liczbaGlosowKand1 = models.IntegerField(default=0)
+    liczbaGlosowKand2 = models.IntegerField(default=0)
 
