@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Gmina, Kandydat, RodzajGminy, Wojewodztwo
+from jsonview.decorators import json_view
 
 
 # Create your views here.
@@ -120,3 +121,7 @@ def index(request):
                 'listaRodzajow'       : rodzaje,
                 'rozmiary'            : rozmiary,
                 })
+@json_view
+def mapdata(request):
+    return [{'hc-key': x.hckey , 'value': x.procKand1 } for x in Wojewodztwo.objects.all()]
+

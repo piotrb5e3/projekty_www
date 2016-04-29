@@ -1,0 +1,121 @@
+                    <p class="font11 miniheader">
+                        Porównanie wyników głosowania na kandydatów
+                    </p>
+                    <table class="font11 statmaintable">
+                        <tr>
+                            <th width=47 rowspan="3">
+                                Nr
+                            </th>
+                            <th rowspan="3">
+                                Nazwa
+                            </th>
+                            <th width=90 rowspan="3">
+                                Liczba głosów ważnych
+                            </th>
+                            <th colspan="2">
+                                {{ kand1Nazwa }}
+                            </th>
+                            <th class="tablerulerhead" width=320 rowspan="3">
+                                Liczba głosów:<br>
+                                na kandydata / ważnych<br>
+                                [%]
+                            </th>
+                            <th colspan="2">
+                                {{ kand2Nazwa }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">
+                                głosów na kandydata
+                            </th>
+                            <th colspan="2">
+                                głosów na kandydata
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                liczba
+                            </th>
+                            <th>
+                                %
+                            </th>
+                            <th>
+                                %
+                            </th>
+                            <th>
+                                liczba
+                            </th>
+                        </tr>
+                        {% for w in wojewodztwa %}
+                        <tr>
+                            <td>
+                                {{ w.numer }}
+                            </td>
+                            <td>
+                                {{ w.nazwa }}
+                            </td>
+                            <td>
+                                {{ w.glosowWaznych }}
+                            </td>
+                            <td>
+                                {{ w.glosowKand1 }}
+                            </td>
+                            <td>
+                                {% if w.glosowWaznych > 0 %}
+                                    {{ w.procKand1 }}
+                                {% else %}
+                                    --.--
+                                {% endif %}
+                            </td>
+                            <td class="tableruler">
+                                {% if w.glosowWaznych > 0 %}
+                                <div>
+                                    <div style="width: {{ w.procKand1 }}%;">
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if w.glosowWaznych > 0 %}
+                                    {{ w.procKand2 }}
+                                {% else %}
+                                    --.--
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ w.glosowKand2 }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <th>
+                                Σ
+                            </th>
+                            <th>
+                                Polska
+                            </th>
+                            <th>
+                                {{ razemGlosowWaznych }}
+                            </th>
+                            <th>
+                                {{ kand1g }}
+                            </th>
+                            <th>
+                                {{ kand1p }}
+                            </th>
+                            <th class="tableruler">
+                                {% if razemGlosowWaznych > 0 %}
+                                <div>
+                                    <div style="width: {{ kand1p }}%;">
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ kand2p }}
+                            </th>
+                            <th>
+                                {{kand2g }}
+                            </th>
+                        </tr>
+                    </table>
