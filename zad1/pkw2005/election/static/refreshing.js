@@ -124,6 +124,31 @@ function request_drawmap(partname){
         });
     });
 }
-function drawmap(data, partname){
+
+function load_panels() {
+    $.getJSON("stats", function( data ) {
+        $("#c1b").css("width", data["c1p"] + "%");
+        $("#c2b").css("width", data["c2p"] + "%");
+        $("#upr").html(data["upr"]);
+        $("#wyd").html(data["wyd"]);
+        $("#odd").html(data["odd"]);
+        $("#waz").html(data["waz"]);
+        $("#c1p").html(data["c1p"]+"%");
+        $("#c2p").html(data["c2p"]+"%");
+        $("#c1c").html(data["c1c"]);
+        $("#c2c").html(data["c2c"]);
+    });
+    $.get("wojewodztwa", function( data ) {
+        $("#tabw").html(data);
+    });
+    $.get("rodzaje", function( data ) {
+        $("#tabr").html(data);
+    });
 }
+
+function refresh_data() {
+    request_drawmap("#mapbox");
+    load_panels();
+}
+
 

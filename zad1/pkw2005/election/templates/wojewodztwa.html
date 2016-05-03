@@ -13,7 +13,7 @@
                                 Liczba głosów ważnych
                             </th>
                             <th colspan="2">
-                                {{ kand1Nazwa }}
+                                {{ kand1.nazwa }}
                             </th>
                             <th class="tablerulerhead" width=320 rowspan="3">
                                 Liczba głosów:<br>
@@ -21,7 +21,7 @@
                                 [%]
                             </th>
                             <th colspan="2">
-                                {{ kand2Nazwa }}
+                                {{ kand2.nazwa }}
                             </th>
                         </tr>
                         <tr>
@@ -95,27 +95,27 @@
                                 Polska
                             </th>
                             <th>
-                                {{ razemGlosowWaznych }}
+                                {{ razemWaznych }}
                             </th>
                             <th>
-                                {{ kand1g }}
+                                {{ kand1.glosow }}
                             </th>
                             <th>
-                                {{ kand1p }}
+                                {{ kand1.proc }}
                             </th>
                             <th class="tableruler">
-                                {% if razemGlosowWaznych > 0 %}
+                                {% if razemWaznych > 0 %}
                                 <div>
-                                    <div style="width: {{ kand1p }}%;">
+                                    <div style="width: {{ kand1.proc }}%;">
                                     </div>
                                 </div>
                                 {% endif %}
                             </th>
                             <th>
-                                {{ kand2p }}
+                                {{ kand2.proc }}
                             </th>
                             <th>
-                                {{kand2g }}
+                                {{kand2.glosow }}
                             </th>
                         </tr>
                     </table>

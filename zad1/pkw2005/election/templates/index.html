@@ -10,10 +10,10 @@
         <script src="{% static "highmaps.js" %}"></script>
         <script src="{% static "exporting.js" %}"></script>
         <script src= "{% static "map_static.js" %}"> </script>
-        <script src= "{% static "drawmap.js" %}"> </script>
+        <script src= "{% static "refreshing.js" %}"> </script>
         <script>
             $(function () {
-                request_drawmap('#mapbox');
+                refresh_data();
             });
         </script>
     </head>
@@ -84,23 +84,19 @@
                                 </tr>
                                 <tr><td>
                                         Liczba uprawnionych:
-                                    </td><td class="bold">
-                                        {{ razemUprawnionych }}
+                                    </td><td id="upr" class="bold">
                                     </td></tr>
                                 <tr><td>
                                         Liczba wydanych kart:
-                                    </td><td class="bold">
-                                        {{ razemWydanychKart }}
+                                    </td><td id="wyd" class="bold">
                                     </td></tr>
                                 <tr><td>
                                          Liczba głosów oddanych
-                                    </td><td class="bold">
-                                        {{ razemGlosowOddanych }}
+                                    </td><td id="odd" class="bold">
                                     </td></tr>
                                 <tr><td>
                                          Liczba głosów ważnych
-                                    </td><td class="bold">
-                                        {{ razemGlosowWaznych }}
+                                    </td><td id="waz" class="bold">
                                     </td></tr>
                             </table>
                         </div>
@@ -252,45 +248,39 @@
                         Szczegółowe wyniki głosowania na kandydatów:
                     </p>
                     <ul>
-                        <li><a href="###">{{ kand1Nazwa }}</a></li>
-                        <li><a href="###">{{ kand2Nazwa }}</a></li>
+                        <li><a href="###">{{ kand1.nazwa }}</a></li>
+                        <li><a href="###">{{ kand2.nazwa }}</a></li>
                     </ul>
                 </div>
                 <div id="panel_final">
                     <p class="bold">
-                    <a href="###" >{{ kand1Nazwa }}</a>
+                    <a href="###" >{{ kand1.nazwa }}</a>
                     </p>
                     <div class="score-holder">
                         <div class="ruler">
-                            <div class="candidate1" style="width: {{ kand1p }}%;" > </div>
+                            <div id="c1b" class="candidate1" > </div>
                         </div>
-                        <div class="percent">
-                            {{ kand1p }}%
+                        <div id="c1p" class="percent">
                         </div>
-                        <div class="count">
-                            {{kand1g }}
+                        <div id="c1c"class="count">
                         </div>
                     </div>
                     <p class="bold">
-                    <a href="###" >{{ kand2Nazwa }}</a>
+                    <a href="###" >{{ kand2.nazwa }}</a>
                     </p>
                     <div class="score-holder">
                         <div class="ruler">
-                            <div class="candidate2" style="width: {{ kand2p }}%" > </div>
+                            <div id="c2b" class="candidate2" > </div>
                         </div>
-                        <div class="percent">
-                            {{ kand2p }}%
+                        <div id="c2p" class="percent">
                         </div>
-                        <div class="count">
-                            {{ kand2g }}
+                        <div id="c2c" class="count">
                         </div>
                     </div>
                 </div>
                 <div id="tabw" class="panel_table">
-                    {% include "wojewodztwa.html" %}
                 </div>
                 <div id="tabr" class="panel_table">
-                    {% include "rodzaje.html" %}
                </div>
             </main>
             <footer>
