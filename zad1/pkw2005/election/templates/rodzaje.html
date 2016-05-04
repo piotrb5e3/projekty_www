@@ -46,7 +46,9 @@
                         {% for r in listaRodzajow %}
                         <tr>
                             <td>
-                                {{ r.nazwa }}
+                                <a onClick="showDialog('r', '{{ r.nazwa }}', '{{ r.nazwa }}')">
+                                    {{ r.nazwa }}
+                                </a>
                             </td>
                             <td>
                                 {{ r.glosowWaznych }}
@@ -89,7 +91,9 @@
                         {% for r in rozmiary %}
                         <tr>
                             <td>
-                                {{ r.nazwa }}
+                                <a onClick="showDialog('s', '{{ r.num }}', '{{r.nazwa}}')">
+                                    {{ r.nazwa }}
+                                </a>
                             </td>
                             <td>
                                 {{ r.waz }}

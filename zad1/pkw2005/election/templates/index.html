@@ -7,10 +7,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="{% static "style.css" %}" rel="stylesheet" type="text/css">
         <script src= "{% static "jquery-1.12.2.js" %}"> </script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="{% static "highmaps.js" %}"></script>
         <script src="{% static "exporting.js" %}"></script>
         <script src= "{% static "map_static.js" %}"> </script>
         <script src= "{% static "refreshing.js" %}"> </script>
+        <script src= "{% static "dialog.js" %}"> </script>
         <script>
             $(function () {
                 refresh_data();
@@ -289,6 +292,8 @@
                     Autor: Piotr Bakalarski
                 </p>
             </footer>
+        </div>
+        <div id="dialog" title="bluh">
         </div>
     </body>
 

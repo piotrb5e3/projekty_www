@@ -52,7 +52,9 @@
                                 {{ w.numer }}
                             </td>
                             <td>
-                                {{ w.nazwa }}
+                                <a onClick="showDialog('w', '{{ w.numer }}', '{{ w.nazwa }}')">
+                                    {{ w.nazwa }}
+                                </a>
                             </td>
                             <td>
                                 {{ w.glosowWaznych }}
