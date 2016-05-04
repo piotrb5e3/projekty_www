@@ -9,6 +9,7 @@ def createranges():
     s=RodzajGminy.objects.get(nazwa="statki")
     z=RodzajGminy.objects.get(nazwa="zagranica")
     r = Rozmiar()
+    r.num = len(result)
     r.nazwa ="Statki i zagranica"
     r.waz = s.glosowWaznych + z.glosowWaznych
     r.k1 = s.glosowKand1 + z.glosowKand1
@@ -24,6 +25,7 @@ def createranges():
 
     r = Rozmiar()
     gm = gminy.filter(liczbaMieszkancow__lte=5000)
+    r.num = len(result)
     r.nazwa ="do 5000"
     r.waz = sum( g.liczbaGlosowWaznych for g in gm)
     r.k1 =  sum( g.liczbaGlosowKand1 for g in gm)
@@ -45,6 +47,7 @@ def createranges():
             ).filter(liczbaMieszkancow__gt=vals[i])
 
         r = Rozmiar()
+        r.num = len(result)
         r.nazwa = "od " + str(vals[i] + 1) + " do " + str(vals[i + 1])
         r.waz = sum( g.liczbaGlosowWaznych for g in gm)
         r.k1 =  sum( g.liczbaGlosowKand1 for g in gm)

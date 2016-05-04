@@ -1,0 +1,31 @@
+<table id="seemore">
+    <tr>
+        <th>
+            Nazwa
+        </th>
+        <th>
+            Liczba głosów k1
+        </th>
+        <th>
+            Liczba głosów k2
+        </th>
+        <th>
+            Edytuj
+        </th>
+    {% for g in gminy %}
+    <tr>
+        <td>
+            {{ g.nazwa }}
+        </td>
+        <td>
+            {{ g.liczbaGlosowKand1 }}
+        </td>
+        <td>
+            {{ g.liczbaGlosowKand2 }}
+        </td>
+        <td>
+            ?CLICK?
+        </td>
+    </tr>
+    {% endfor %}
+</table>
