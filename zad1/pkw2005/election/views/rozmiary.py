@@ -64,6 +64,7 @@ def createranges():
     r = Rozmiar()
     gm = gminy.filter(liczbaMieszkancow__gt=500000)
     r.nazwa ="pow 500000"
+    r.num = len(result)
     r.waz = sum( g.liczbaGlosowWaznych for g in gm)
     r.k1 =  sum( g.liczbaGlosowKand1 for g in gm)
     r.k2 =  sum( g.liczbaGlosowKand2 for g in gm)
