@@ -1,13 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from django.http import Http404
-from ..models import Gmina, Wojewodztwo, RodzajGminy
+from ..models import Gmina, Wojewodztwo, RodzajGminy, Kandydat
 
 def seemore(request):
     vals = [5000, 10000, 20000, 50000, 100000, 200000, 500000]
 
     if request.method == 'POST':
         raise Http404("Wrong method")
+
+    kand1 = get_object_or_404(Kandydat, numer = 1)
+    kand2 = get_object_or_404(Kandydat, numer = 2)
 
     gminy = {
             'w' :
@@ -41,4 +44,8 @@ def seemore(request):
                                 liczbaMieszkancow__gt=
                                 vals[int(request.GET['v'])-2]))))()
             }[request.GET['type']]()
-    return render(request, 'lista.html',{'gminy' : gminy})
+    return render(request, 'lista.html',{
+        'gminy' : gminy,
+        'kand1' : kand1,
+        'kand2' : kand2,
+    })

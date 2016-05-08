@@ -46,6 +46,14 @@
                     <div id="strip-text">
                         Wyniki głosowania
                     </div>
+                    <div id="uname" style="float: right;">
+                    {% if uname %}
+                        Logged in as {{ uname }}.
+                        <a href="/logout">Log out</a>
+                    {% else %}
+                        <a href="/login">Log in</a>
+                    {% endif %}
+                    </div>
                 </div>
                 <div id="panel_w_map">
                     <p class="font11 miniheader">

@@ -352,6 +352,21 @@
         background-color: rgb(2, 96, 212);
         height: 100%;
     }
+
+    #uname {
+        height: 24px;
+        padding: 8px 10px;
+        font-size: 16px;
+        float: right;
+        font-weight: bold;
+        background-color: #a8c7d3;
+        color: #fff;
+    }
+
+    #uname a {
+        color: #fff;
+        text-decoration: underline; 
+    }
 }
 
 @media print {

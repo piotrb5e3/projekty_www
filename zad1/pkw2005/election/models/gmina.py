@@ -27,7 +27,6 @@ class Gmina(models.Model):
             raise ValidationError(
                     "Liczba głosów oddanych na kandydata nie może być ujemna!")
 
-
     nazwa = models.CharField(max_length = 200, unique = False)
     rodzaj = models.ForeignKey("RodzajGminy", on_delete=models.CASCADE)
     wojewodztwo = models.ForeignKey("Wojewodztwo", blank = True, null = True)

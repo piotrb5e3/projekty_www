@@ -1,17 +1,23 @@
 <table id="seemore">
     <tr>
-        <th>
+        <th rowspan=2>
             Nazwa
         </th>
-        <th>
-            Liczba głosów k1
+        <th colspan=2>
+            Liczba głosów
         </th>
-        <th>
-            Liczba głosów k2
-        </th>
-        <th>
+        <th rowspan=2>
             Edytuj
         </th>
+    </tr>
+    <tr>
+        <th>
+            {{ kand1.nazwa }}
+        </th>
+        <th>
+            {{ kand2.nazwa }}
+        </th>
+    </tr>
     {% for g in gminy %}
     <tr>
         <td>
@@ -24,7 +30,7 @@
             {{ g.liczbaGlosowKand2 }}
         </td>
         <td>
-            ?CLICK?
+            <a onClick="showEdit({{ g.id }})">?CLICK?</a>
         </td>
     </tr>
     {% endfor %}
