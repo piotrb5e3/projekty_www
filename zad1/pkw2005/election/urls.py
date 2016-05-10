@@ -9,6 +9,7 @@ urlpatterns = [
         url(r'^stats', views.stats, name = 'stats'),
         url(r'^seemore', views.seemore, name = 'seemore'),
         url(r'^gedit', views.edit_gmina, name = 'edit_gmina'),
+        url(r'^gverify', views.submit_gmina, name = 'submit_gmina'),
         url('^', include('django.contrib.auth.urls')),
 
 ]

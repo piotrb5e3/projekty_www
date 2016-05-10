@@ -1,37 +1,47 @@
-<table id="seemore">
-    <tr>
-        <th rowspan=2>
-            Nazwa
-        </th>
-        <th colspan=2>
-            Liczba głosów
-        </th>
-        <th rowspan=2>
-            Edytuj
-        </th>
-    </tr>
-    <tr>
-        <th>
-            {{ kand1.nazwa }}
-        </th>
-        <th>
-            {{ kand2.nazwa }}
-        </th>
-    </tr>
-    {% for g in gminy %}
-    <tr>
-        <td>
-            {{ g.nazwa }}
-        </td>
-        <td>
-            {{ g.liczbaGlosowKand1 }}
-        </td>
-        <td>
-            {{ g.liczbaGlosowKand2 }}
-        </td>
-        <td>
-            <a onClick="showEdit({{ g.id }})">?CLICK?</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+<html>
+    <head>
+    </head>
+    <body>
+        <div>
+            <div id="content">
+                <table id="seemore">
+                    <tr>
+                        <th rowspan=2>
+                            Nazwa
+                        </th>
+                        <th colspan=2>
+                            Liczba głosów
+                        </th>
+                        <th rowspan=2>
+                            Edytuj
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ kand1.nazwa }}
+                        </th>
+                        <th>
+                            {{ kand2.nazwa }}
+                        </th>
+                    </tr>
+                    {% for g in gminy %}
+                    <tr>
+                        <td>
+                            {{ g.nazwa }}
+                        </td>
+                        <td>
+                            {{ g.liczbaGlosowKand1 }}
+                        </td>
+                        <td>
+                            {{ g.liczbaGlosowKand2 }}
+                        </td>
+                        <td>
+                            <a onClick="showEdit({{ g.id }})"> Zmodyfikuj</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

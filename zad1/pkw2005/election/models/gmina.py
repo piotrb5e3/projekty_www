@@ -1,5 +1,6 @@
-from django.db import models
+from django.db import models, transaction
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import BaseUserManager, AbstractUser, User
 
 class Gmina(models.Model):
 
@@ -26,6 +27,26 @@ class Gmina(models.Model):
         if(self.liczbaGlosowKand1 < 0 or self.liczbaGlosowKand2 <0):
             raise ValidationError(
                     "Liczba głosów oddanych na kandydata nie może być ujemna!")
+
+
+    rev = models.IntegerField(default=0)
+    revtime = models.DateTimeField(auto_now=True)
+    revuser = models.ForeignKey(User, default=None, null=True)
+
+    @transaction.atomic
+    def update_glosy(self, lk1, lk2, revnum, user):
+        if (revnum != self.rev or lk1 < 0 or lk2 < 0 or
+                lk1 + lk2 > self.liczbaGlosowOddanych) :
+                    return False
+        else:
+            self.rev += 1
+            self.revuser = user
+            self.liczbaGlosowKand1 = lk1
+            self.liczbaGlosowKand2 = lk2
+            self.liczbaGlosowWaznych = lk1 + lk2
+            self.save()
+            return True
+
 
     nazwa = models.CharField(max_length = 200, unique = False)
     rodzaj = models.ForeignKey("RodzajGminy", on_delete=models.CASCADE)
