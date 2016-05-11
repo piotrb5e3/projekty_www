@@ -28,11 +28,6 @@ class Gmina(models.Model):
             raise ValidationError(
                     "Liczba głosów oddanych na kandydata nie może być ujemna!")
 
-
-    rev = models.IntegerField(default=0)
-    revtime = models.DateTimeField(auto_now=True)
-    revuser = models.ForeignKey(User, default=None, null=True)
-
     @transaction.atomic
     def update_glosy(self, lk1, lk2, revnum, user):
         if (revnum != self.rev or lk1 < 0 or lk2 < 0 or
@@ -47,6 +42,9 @@ class Gmina(models.Model):
             self.save()
             return True
 
+    rev = models.IntegerField(default=0)
+    revtime = models.DateTimeField(auto_now=True)
+    revuser = models.ForeignKey(User, default=None, null=True)
 
     nazwa = models.CharField(max_length = 200, unique = False)
     rodzaj = models.ForeignKey("RodzajGminy", on_delete=models.CASCADE)
