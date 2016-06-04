@@ -1,19 +1,18 @@
-{% load staticfiles %}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <title>Wybory 2005</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link href="{% static "style.css" %}" rel="stylesheet" type="text/css">
-        <script src= "{% static "jquery-1.12.2.js" %}"> </script>
+        <link href="static/style.css" rel="stylesheet" type="text/css">
+        <script src= "static/jquery-1.12.2.js"> </script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="{% static "highmaps.js" %}"></script>
-        <script src="{% static "exporting.js" %}"></script>
-        <script src= "{% static "map_static.js" %}"> </script>
-        <script src= "{% static "refreshing.js" %}"> </script>
-        <script src= "{% static "dialog.js" %}"> </script>
+        <script src="static/highmaps.js"></script>
+        <script src="static/exporting.js"></script>
+        <script src="static/map_static.js"> </script>
+        <script src="static/refreshing.js"> </script>
+        <script src="static/dialog.js"> </script>
         <script>
             $(function () {
                 refresh_data();
@@ -24,7 +23,7 @@
     <body>
         <div id="container">
             <header>
-                <img src="{% static "header.png" %}" alt=""/>
+                <img src="static/header.png" alt=""/>
             </header>
             <nav>
                 <ul id="navlist" class="font11">
@@ -44,15 +43,15 @@
             <main>
                 <div id="strip" >
                     <div id="strip-text">
-                        Wyniki głosowania
+                        Wyniki głosowania(static!)
                     </div>
                     <div id="uname" style="float: right;">
-                    {% if uname %}
+ <!--                   {% if uname %}
                         Zalogowany jako {{ uname }}.
                         <a href="/logout/">Wyloguj</a>
                     {% else %}
                         <a href="/login/">Zaloguj</a>
-                    {% endif %}
+                        {% endif %} -->
                     </div>
                 </div>
                 <div id="panel_w_map">
@@ -61,7 +60,6 @@
                     </p>
                     <div>
                         <div id = "mapbox">
-                            <!--<img src = "{% static "map.png" %}" /> -->
                         </div>
                         <div id = "statbox">
                             <p class="font17" id="polska">
@@ -95,19 +93,19 @@
                                 </tr>
                                 <tr><td>
                                         Liczba uprawnionych:
-                                    </td><td id="upr" class="bold">
+                                    </td><td class="upr" class="bold">
                                     </td></tr>
                                 <tr><td>
                                         Liczba wydanych kart:
-                                    </td><td id="wyd" class="bold">
+                                    </td><td class="wyd" class="bold">
                                     </td></tr>
                                 <tr><td>
                                          Liczba głosów oddanych
-                                    </td><td id="odd" class="bold">
+                                    </td><td class="odd" class="bold">
                                     </td></tr>
                                 <tr><td>
                                          Liczba głosów ważnych
-                                    </td><td id="waz" class="bold">
+                                    </td><td class="waz" class="bold">
                                     </td></tr>
                             </table>
                         </div>
@@ -259,39 +257,176 @@
                         Szczegółowe wyniki głosowania na kandydatów:
                     </p>
                     <ul>
-                        <li><a href="###">{{ kand1.nazwa }}</a></li>
-                        <li><a href="###">{{ kand2.nazwa }}</a></li>
+                        <li><a href="###" class="c1n">xx1</a></li>
+                        <li><a href="###" class="c2n">xx2</a></li>
                     </ul>
                 </div>
                 <div id="panel_final">
                     <p class="bold">
-                    <a href="###" >{{ kand1.nazwa }}</a>
+                    <a href="###" class="c1n">xx1</a>
                     </p>
                     <div class="score-holder">
                         <div class="ruler">
-                            <div id="c1b" class="candidate1" > </div>
+                            <div class="c1b candidate1" > </div>
                         </div>
-                        <div id="c1p" class="percent">
+                        <div class="c1p percent">
                         </div>
-                        <div id="c1c"class="count">
+                        <div class="c1c count">
                         </div>
                     </div>
                     <p class="bold">
-                    <a href="###" >{{ kand2.nazwa }}</a>
+                    <a href="###" class="c2n">xx2</a>
                     </p>
                     <div class="score-holder">
                         <div class="ruler">
-                            <div id="c2b" class="candidate2" > </div>
+                            <div class="c2b candidate2" > </div>
                         </div>
-                        <div id="c2p" class="percent">
+                        <div class="c2p percent">
                         </div>
-                        <div id="c2c" class="count">
+                        <div class="c2c count">
                         </div>
                     </div>
                 </div>
                 <div id="tabw" class="panel_table">
+                    <p class="font11 miniheader">
+                        Porównanie wyników głosowania na kandydatów
+                    </p>
+                    <table class="font11 statmaintable">
+                        <tr>
+                            <th width=47 rowspan="3">
+                                Nr
+                            </th>
+                            <th rowspan="3">
+                                Nazwa
+                            </th>
+                            <th width=90 rowspan="3">
+                                Liczba głosów ważnych
+                            </th>
+                            <th colspan="2" class="c1n">
+                                xx1
+                            </th>
+                            <th class="tablerulerhead" width=320 rowspan="3">
+                                Liczba głosów:<br>
+                                na kandydata / ważnych<br>
+                                [%]
+                            </th>
+                            <th colspan="2" class="c2n">
+                                xx2
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">
+                                głosów na kandydata
+                            </th>
+                            <th colspan="2">
+                                głosów na kandydata
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                liczba
+                            </th>
+                            <th>
+                                %
+                            </th>
+                            <th>
+                                %
+                            </th>
+                            <th>
+                                liczba
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Σ
+                            </th>
+                            <th>
+                                Polska
+                            </th>
+                            <th class="waz">
+                                0
+                            </th>
+                            <th class="c1c">
+                                0
+                            </th>
+                            <th class="c1p">
+                                0%
+                            </th>
+                            <th class="tableruler">
+                                <div>
+                                    <div style="width: 50%;" class="c1b">
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="c2p">
+                                0% 
+                            </th>
+                            <th class="c2c">
+                                0
+                            </th>
+                        </tr>
+                    </table>
                 </div>
                 <div id="tabr" class="panel_table">
+                    <p class="font11 miniheader">
+                        Porównanie wyników głosowania na kandydatów w zależności od siedziby komisji obwodowej
+                    </p>
+                    <table class="font11 statmaintable">
+                        <tbody>
+                            <tr>
+                                <th rowspan="3">
+                                    Podział
+                                </th>
+                                <th width=90 rowspan="3">
+                                    Liczba głosów ważnych
+                                </th>
+                                <th colspan="2" class="c1n">
+                                    xx1
+                                </th>
+                                <th class="tablerulerhead" width=320 rowspan="3">
+                                    Liczba głosów:<br>
+                                    na kandydata / ważnych<br>
+                                    [%]
+                                </th>
+                                <th colspan="2" class="c2n">
+                                    xx2
+                                </th>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    głosów na kandydata
+                                </th>
+                                <th colspan="2">
+                                    głosów na kandydata
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    liczba
+                                </th>
+                                <th>
+                                    %
+                                </th>
+                                <th>
+                                    %
+                                </th>
+                                <th>
+                                    liczba
+                                </th>
+                            </tr>
+                        </tbody>
+                        <tbody id="lrodzaj">
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td colspan="7" style="padding-left: 20px;">
+                                    Porównanie wyników głosowania na kandydatów w zależności od liczby mieszkańców gminy
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody id="lrozmiar">
+                        </tbody>
+                    </table>
                </div>
             </main>
             <footer>

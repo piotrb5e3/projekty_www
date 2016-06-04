@@ -176,7 +176,7 @@
     #panel_w_map {
         border: 1px solid #d3d2cd;
         background-color: #e7e7de;
-        width: 563px;
+        width: 564px;
         height: 427px;
         float: left;
         margin-left: 12px;
@@ -303,7 +303,7 @@
 
     .statmaintable {
         border-collapse: collapse;
-        border-spacing: 0px;
+        border-spacing: 1px;
         width:967px;
         margin: 0px -1px 0px -1px;
     }
