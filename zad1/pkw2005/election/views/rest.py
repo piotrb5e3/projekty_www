@@ -7,7 +7,6 @@ class GminaList(generics.ListCreateAPIView):
     queryset = Gmina.objects.all()
     serializer_class = GminaSerializer
 
-
 class GminaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Gmina.objects.all()
     serializer_class = GminaSerializer
@@ -17,6 +16,10 @@ class WojewodztwoList(generics.ListAPIView):
     serializer_class = WojewodztwoSerializer
 
 class KandydatList(generics.ListAPIView):
+    queryset = Kandydat.objects.all()
+    serializer_class = KandydatSerializer
+
+class KandydatDetail(generics.RetrieveAPIView):
     queryset = Kandydat.objects.all()
     serializer_class = KandydatSerializer
 

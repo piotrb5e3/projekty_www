@@ -13,9 +13,12 @@
         <script src="static/map_static.js"> </script>
         <script src="static/refreshing.js"> </script>
         <script src="static/dialog.js"> </script>
+        <script src="static/graboffline.js"> </script>
         <script>
             $(function () {
-                refresh_data();
+                load_from_ls();
+                graboffline();
+                load_from_ls();
             });
         </script>
     </head>
@@ -292,79 +295,85 @@
                         Porównanie wyników głosowania na kandydatów
                     </p>
                     <table class="font11 statmaintable">
-                        <tr>
-                            <th width=47 rowspan="3">
-                                Nr
-                            </th>
-                            <th rowspan="3">
-                                Nazwa
-                            </th>
-                            <th width=90 rowspan="3">
-                                Liczba głosów ważnych
-                            </th>
-                            <th colspan="2" class="c1n">
-                                xx1
-                            </th>
-                            <th class="tablerulerhead" width=320 rowspan="3">
-                                Liczba głosów:<br>
-                                na kandydata / ważnych<br>
-                                [%]
-                            </th>
-                            <th colspan="2" class="c2n">
-                                xx2
-                            </th>
-                        </tr>
-                        <tr>
-                            <th colspan="2">
-                                głosów na kandydata
-                            </th>
-                            <th colspan="2">
-                                głosów na kandydata
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>
-                                liczba
-                            </th>
-                            <th>
-                                %
-                            </th>
-                            <th>
-                                %
-                            </th>
-                            <th>
-                                liczba
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>
-                                Σ
-                            </th>
-                            <th>
-                                Polska
-                            </th>
-                            <th class="waz">
-                                0
-                            </th>
-                            <th class="c1c">
-                                0
-                            </th>
-                            <th class="c1p">
-                                0%
-                            </th>
-                            <th class="tableruler">
-                                <div>
-                                    <div style="width: 50%;" class="c1b">
+                        <tbody>
+                            <tr>
+                                <th width=47 rowspan="3">
+                                    Nr
+                                </th>
+                                <th rowspan="3">
+                                    Nazwa
+                                </th>
+                                <th width=90 rowspan="3">
+                                    Liczba głosów ważnych
+                                </th>
+                                <th colspan="2" class="c1n">
+                                    xx1
+                                </th>
+                                <th class="tablerulerhead" width=320 rowspan="3">
+                                    Liczba głosów:<br>
+                                    na kandydata / ważnych<br>
+                                    [%]
+                                </th>
+                                <th colspan="2" class="c2n">
+                                    xx2
+                                </th>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    głosów na kandydata
+                                </th>
+                                <th colspan="2">
+                                    głosów na kandydata
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    liczba
+                                </th>
+                                <th>
+                                    %
+                                </th>
+                                <th>
+                                    %
+                                </th>
+                                <th>
+                                    liczba
+                                </th>
+                            </tr>
+                        </tbody>
+                        <tbody id="tabwoj">
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Σ
+                                </th>
+                                <th>
+                                    Polska
+                                </th>
+                                <th class="waz">
+                                    0
+                                </th>
+                                <th class="c1c">
+                                    0
+                                </th>
+                                <th class="c1p">
+                                    0%
+                                </th>
+                                <th class="tableruler">
+                                    <div>
+                                        <div style="width: 50%;" class="c1b">
+                                        </div>
                                     </div>
-                                </div>
-                            </th>
-                            <th class="c2p">
-                                0% 
-                            </th>
-                            <th class="c2c">
-                                0
-                            </th>
-                        </tr>
+                                </th>
+                                <th class="c2p">
+                                    0% 
+                                </th>
+                                <th class="c2c">
+                                    0
+                                </th>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div id="tabr" class="panel_table">
