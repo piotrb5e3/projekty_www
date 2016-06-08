@@ -67,6 +67,10 @@
         background-color: rgb(118, 128, 141);
     }
 
+    .hidden {
+        display: none;
+    }
+
     .lightgreyborder {
         border: 1px solid rgb(128,128,128);   
     }

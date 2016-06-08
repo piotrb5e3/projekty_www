@@ -16,9 +16,9 @@
         <script src="static/graboffline.js"> </script>
         <script>
             $(function () {
+                set_logged_state();
                 load_from_ls();
                 graboffline();
-                load_from_ls();
             });
         </script>
     </head>
@@ -49,12 +49,7 @@
                         Wyniki głosowania(static!)
                     </div>
                     <div id="uname" style="float: right;">
- <!--                   {% if uname %}
-                        Zalogowany jako {{ uname }}.
-                        <a href="/logout/">Wyloguj</a>
-                    {% else %}
                         <a href="/login/">Zaloguj</a>
-                        {% endif %} -->
                     </div>
                 </div>
                 <div id="panel_w_map">
@@ -424,7 +419,7 @@
                                 </th>
                             </tr>
                         </tbody>
-                        <tbody id="lrodzaj">
+                        <tbody id="tabrodzaj">
                         </tbody>
                         <tbody>
                             <tr>
@@ -433,7 +428,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                        <tbody id="lrozmiar">
+                        <tbody id="tabrozmiar">
                         </tbody>
                     </table>
                </div>
@@ -445,7 +440,63 @@
                 </p>
             </footer>
         </div>
-        <div id="dialog" title="bluh">
+        <div id="listdial" title="bluh" class="hidden">
+            <table id="seemore">
+                <tbody>
+                    <tr>
+                        <th rowspan=2>
+                            Nazwa
+                        </th>
+                        <th colspan=2>
+                            Liczba głosów
+                        </th>
+                        <th rowspan=2>
+                            Edytuj
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="c1n">
+                            Kand1
+                        </th>
+                        <th class="c2n">
+                            Kand2
+                        </th>
+                    </tr>
+                </tbody>
+                <tbody id="listbody">
+                </tbody>
+           </table>
+        </div>
+        <div id="eddial" name="bluh2" class="hidden">
+            <form id="geditid">
+                <table id="edittab">
+                    <tr>
+                        <th>Kandydat</th>
+                        <th>Liczba głosów</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="K1" class="c1n">
+                                Kandydat1
+                            </label>
+                        </td>
+                        <td>
+                            <input type="number" min="0" name="K1" id="K1input" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="K2" class="c2n">
+                                Kandydat2
+                            </label>
+                        </td>
+                        <td>
+                            <input type="number" min="0" name="K2" id="K2input" required>
+                        </td>
+                    </tr>
+                </table>
+                <button type="button" id="gobutton">Zapisz</button>
+            </form>
         </div>
     </body>
 

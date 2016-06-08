@@ -16,6 +16,13 @@ function graboffline(){
         if(data instanceof Array){
             localStorage.setItem("gminy", JSON.stringify(data));
         }
+        setTimeout(load_from_ls(), 1000);
+    });
+
+    $.get("users", function(data){
+        if(data instanceof Array){
+            localStorage.setItem("users", JSON.stringify(data));
+        }
     });
 
     $.get("wojewodztwa", function(data){

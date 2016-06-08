@@ -1,3 +1,18 @@
+function map(array, transform) {
+    var mapped = [];
+    for (var i = 0; i < array.length; i++)
+        mapped.push(transform(array[i]));
+    return mapped;
+}
+
+function sum(array) {
+    var summ = 0;
+    for (var i = 0; i < array.length; i++)
+        summ += array[i]
+    return summ;
+}
+
+
 function drawmap( data ) {
     $("#mapbox").highcharts('Map', {
         title : {
@@ -253,10 +268,131 @@ function load_wojewodztwa() {
     }
 }
 
-function load_from_ls() {
-    //request_drawmap("#mapbox");
-    load_panels();
-    load_wojewodztwa();
+function load_rodzaje() {
+    rd = localStorage.getItem("rodzaje");
+    gm =  localStorage.getItem("gminy");
+    if( gm != null && rd != null){
+        rd = JSON.parse(rd);
+        gm = JSON.parse(gm);
+        data = [];
+        for(i = 0; i < rd.length; i++){
+            pk = rd[i]["pk"];
+            dt = {}
+            dt["pk"] = pk;
+            dt["nazwa"] = rd[i]["nazwa"];
+            dt["waz"] = 0;
+            dt["c1c"] = 0;
+            dt["c2c"] = 0;
+            data[pk] = dt;
+        }
+        for(i = 0; i < gm.length; i++){
+            nr = gm[i]["rodzaj"];
+            if(nr != null) {
+                dt = data[nr];
+                dt["waz"] += gm[i]["liczbaGlosowWaznych"];
+                dt["c1c"] += gm[i]["liczbaGlosowKand1"];
+                dt["c2c"] += gm[i]["liczbaGlosowKand2"];
+                data[nr] = dt;
+            }
+        }
+        $("#tabrodzaj").html("");
+        data.forEach(function(elem){
+            if(elem["waz"] > 0){
+                elem["c1p"] = (100 * elem["c1c"] / elem["waz"]).toFixed(2);
+                elem["c2p"] = (100 * elem["c2c"] / elem["waz"]).toFixed(2);
+            } else {
+                elem["c1p"] = "--.--";
+                elem["c2p"] = "--.--";
+            }
+            newrow = "<tr>\n" +
+                "<td>\n<a onClick=\"showDialog('r', '"+elem["pk"]+"', '"+
+                elem["nazwa"]+"')\">"+elem["nazwa"]+"</a>\n</td>\n"+
+                "<td>"+elem["waz"]+"</td>\n<td>"+elem["c1c"]+"</td>\n"+
+                "<td>"+elem["c1p"]+"%</td>\n<td class=\"tableruler\">\n"+
+                ((elem["waz"]>0)?"<div><div style=\"width: "+
+                 elem["c1p"]+"%;\">\n</div></div>":"")+
+                "</td>\n<td>"+elem["c2p"]+"%</td>\n<td>"+elem["c2c"]+"</td>\n"+
+                "</tr>";
+            $("#tabrodzaj").append(newrow);
+        });
+    }
 }
 
+function load_rozmiary() {
+    gm =  localStorage.getItem("gminy");
+    breaks = [5000,10000,20000,50000,100000,200000,500000];
+    if( gm != null ){
+        gm = JSON.parse(gm);
+
+        data = [];
+        dt = {};
+        dt["nazwa"] = "do 5000";
+        dt["num"] = 0;
+        dt["waz"] = 0;
+        dt["c1c"] = 0;
+        dt["c2c"] = 0;
+        data.push(dt);
+
+        for(i = 0; i < breaks.length - 1; i++){
+            dt = {};
+            dt["nazwa"] = "od " + breaks[i] + " do " + breaks[i + 1];
+            dt["num"] = i + 1;
+            dt["waz"] = 0;
+            dt["c1c"] = 0;
+            dt["c2c"] = 0;
+            data.push(dt);
+        }
+
+        dt = {};
+        dt["nazwa"] = "pow 500000";
+        dt["num"] = breaks.length;
+        dt["waz"] = 0;
+        dt["c1c"] = 0;
+        dt["c2c"] = 0;
+        data.push(dt);
+
+        for(i = 0; i < gm.length; i++){
+            nr = sum(map(breaks, function(x){
+                if(x<gm[i]["liczbaMieszkancow"])
+                    return 1;
+                else
+                    return 0;
+            }));
+            if(nr != null) {
+                dt = data[nr];
+                dt["waz"] += gm[i]["liczbaGlosowWaznych"];
+                dt["c1c"] += gm[i]["liczbaGlosowKand1"];
+                dt["c2c"] += gm[i]["liczbaGlosowKand2"];
+                data[nr] = dt;
+            }
+        }
+        $("#tabrozmiar").html("");
+        data.forEach(function(elem){
+            if(elem["waz"] > 0){
+                elem["c1p"] = (100 * elem["c1c"] / elem["waz"]).toFixed(2);
+                elem["c2p"] = (100 * elem["c2c"] / elem["waz"]).toFixed(2);
+            } else {
+                elem["c1p"] = "--.--";
+                elem["c2p"] = "--.--";
+            }
+            newrow = "<tr>\n" +
+                "<td>\n<a onClick=\"showDialog('s', '"+elem["num"]+"', '"+
+                elem["nazwa"]+"')\">"+elem["nazwa"]+"</a>\n</td>\n"+
+                "<td>"+elem["waz"]+"</td>\n<td>"+elem["c1c"]+"</td>\n"+
+                "<td>"+elem["c1p"]+"%</td>\n<td class=\"tableruler\">\n"+
+                ((elem["waz"]>0)?"<div><div style=\"width: "+
+                 elem["c1p"]+"%;\">\n</div></div>":"")+
+                "</td>\n<td>"+elem["c2p"]+"%</td>\n<td>"+elem["c2c"]+"</td>\n"+
+                "</tr>";
+            $("#tabrozmiar").append(newrow);
+        });
+    }
+}
+
+function load_from_ls() {
+    load_panels();
+    load_wojewodztwa();
+    load_rodzaje();
+    load_rozmiary();
+}
 

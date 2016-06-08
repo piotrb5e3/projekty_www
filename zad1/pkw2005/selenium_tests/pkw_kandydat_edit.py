@@ -24,6 +24,7 @@ try:
     e.click()
     driver.find_element_by_link_text("LOG OUT").click()
     driver.get("http://127.0.0.1:8000")
+    time.sleep(5)
     e = driver.find_element_by_xpath("//*[@id='panel_final']/p[2]/a")
     assert ss in e.text
     time.sleep(1)

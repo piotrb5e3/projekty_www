@@ -4,14 +4,14 @@ import time, string, random
 from pkw_login_logout import login
 
 def open_lubuskie(d):
-    d.find_element_by_xpath('//*[@id="tabw"]/table/tbody/tr[7]/td[2]/a').click()
+    d.find_element_by_xpath('//*[@id="tabwoj"]/tr[4]/td[2]/a').click()
     e = d.find_element_by_xpath('//*[@id="ui-id-1"]')
-    assert "Gminy w lubuskie, woj." in e.text
+    assert "lubuskie, woj." in e.text
 
 
 def open_lubuskie_edit(d):
     open_lubuskie(d)
-    d.find_element_by_xpath('//*[@id="seemore"]/tbody/tr[3]/td[4]/a').click()
+    d.find_element_by_xpath('//*[@id="listbody"]/tr/td[4]/a').click()
     e = d.find_element_by_xpath('//*[@id="edittab"]/tbody/tr[1]/th[1]')
     assert "Kandydat" in e.text
 
@@ -27,13 +27,14 @@ try:
 
     # Test for login prompt when you try to edit without login:
 
-    driver.find_element_by_xpath('//*[@id="seemore"]/tbody/tr[3]/td[4]/a').click()
-    e = driver.find_element_by_xpath('//*[@id="content-main"]/p[1]')
-    assert "Please login to see this page" in e.text
+    driver.find_element_by_xpath('//*[@id="listbody"]/tr/td[4]/a').click()
+    e = driver.find_element_by_xpath('//*[@id="login-form"]/table/tbody/tr[1]/td[1]/label')
+    assert "name" in e.text
 
     # Test for no login prompt when you try to edit as a logged user
 
     login(driver, "alice", "bobbobbob")
+    driver.get("http://localhost:8000")
     open_lubuskie_edit(driver)
   
 finally:

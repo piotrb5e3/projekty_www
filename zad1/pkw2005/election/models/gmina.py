@@ -28,7 +28,6 @@ class Gmina(models.Model):
             raise ValidationError(
                     "Liczba głosów oddanych na kandydata nie może być ujemna!")
 
-    @transaction.atomic
     def update_glosy(self, lk1, lk2, revnum, user):
         if (revnum != self.rev or lk1 < 0 or lk2 < 0 or
                 lk1 + lk2 > self.liczbaGlosowOddanych) :
