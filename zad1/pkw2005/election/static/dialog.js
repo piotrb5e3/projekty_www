@@ -33,7 +33,7 @@ function load_edit(gid) {
         ind = 0;
         while(ind < gm.length && gm[ind]["pk"] != gid) ind++;
         if(ind >= gm.length)
-            alert("BŁĄD!\nNie znaleziono gminy.");
+            $("#gederr").text("BŁĄD!\nNie znaleziono gminy.");
         else{
             gmina = gm[ind];
             $("#K1input").val(gmina["liczbaGlosowKand1"]);
@@ -48,43 +48,55 @@ function load_edit(gid) {
 
             $("#gobutton").off("click");
             $("#gobutton").click(function() {
-                $.getJSON("gminy/"+gid+"/", function(data) {
-                    if(data["rev"] != gmina["rev"]){
-                        alert("Dane zostały zmodyfikowane " +
-                                "przez innego usera.\n" +
-                                "Przeładuj stronę i spróbuj ponownie");
-                    } else if(confirm("Ostatnia modyfikacja przez \"" +
-                                uname + "\" o godzinie " +
-                                d.toLocaleString() + "\nZapisać?")){
-                        dt = {};
-                        dt["rev"] = gmina["rev"];
-                        dt["liczbaGlosowKand1"] = $("#K1input").val();
-                        dt["liczbaGlosowKand2"] = $("#K2input").val();
-                        $.ajax({
-                            url: "gminy/"+gid+"/",
-                            beforeSend: function (request){
-                                csrf = getCookie("csrftoken");
-                                if(csrf != "") {
-                                    request.setRequestHeader(
-                                        "X-CSRFToken",
-                                        csrf);
+                if($("#K1input").val() <0 || $("#K2input").val() < 0){
+                    $("#gederr").text("Liczby głosów nie mogą być " +
+                            "ujemne!");
+                } else if((+$("#K1input").val()) + (+$("#K2input").val()) >
+                        gmina["liczbaGlosowOddanych"]){
+                    $("#gederr").text("Zbyt dużo głosów! "+
+                            "Suma głosów musi być <= " +
+                            gmina["liczbaGlosowOddanych"]+" (a jest " +
+                            ((+$("#K1input").val()) + (+$("#K2input").val())) +
+                            ")");
+                }else{
+                    $.getJSON("gminy/"+gid+"/", function(data) {
+                        if(data["rev"] != gmina["rev"]){
+                            $("#gederr").text("Dane zmodyfikowane przez innego"+
+                                " użytkownika. Odświerz stronę i spróbuj" +
+                                " ponownie");
+                        } else if(confirm("Ostatnia modyfikacja przez \"" +
+                                    uname + "\" o godzinie " +
+                                    d.toLocaleString() + "\nZapisać?")){
+                            dt = {};
+                            dt["rev"] = gmina["rev"];
+                            dt["liczbaGlosowKand1"] = $("#K1input").val();
+                            dt["liczbaGlosowKand2"] = $("#K2input").val();
+                            $.ajax({
+                                url: "gminy/"+gid+"/",
+                                beforeSend: function (request){
+                                    csrf = getCookie("csrftoken");
+                                    if(csrf != "") {
+                                        request.setRequestHeader(
+                                            "X-CSRFToken",
+                                            csrf);
+                                    }
+                                            },
+                                data: dt,
+                                dataType: "json",
+                                type: "PATCH",
+                                success: function(data){
+                                    window.location.replace("/");
+                                },
+                                error:function(jqXHR, textStatus, errorThrown){
+                                    $("#gederr").text("Nastąpił błąd. Prawdopodobnie inny użytkownik "+
+                                            "zmodyfikował dane. Przeładuj stronę i spróbuj ponownie.");
                                 }
-                                        },
-                            data: dt,
-                            dataType: "json",
-                            type: "PATCH",
-                            success: function(data){
-                                window.location.replace("/");
-                            },
-                            error:function(jqXHR, textStatus, errorThrown){
-                                alert("Nastąpił błąd. Spróbuj ponownie\n" +
-                                        JSON.stringify(jqXHR, null, 4));
-                            }
-                        });
-                    }
-                }).fail(function() {
-                    alert("Could not get data from server. Try again later");    
+                            });
+                        }
+                    }).fail(function() {
+                        $("#gederr").text("Nie udało się połączyć z serwerem. Spróbuj ponownie.");
                     });
+                }
             });
         }
     }
