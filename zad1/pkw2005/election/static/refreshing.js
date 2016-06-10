@@ -390,6 +390,7 @@ function load_rozmiary() {
 }
 
 function load_from_ls() {
+    set_logged_state();
     load_panels();
     load_wojewodztwa();
     load_rodzaje();

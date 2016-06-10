@@ -1,4 +1,5 @@
-function graboffline(){
+function initialize(){
+    load_from_ls();
     $.get("kandydaci", function(data){
         if (data instanceof Array){
             data.forEach(function(kand){
@@ -7,33 +8,29 @@ function graboffline(){
                 else
                     localStorage.setItem("kand2", JSON.stringify(kand));
             });
-        } else {
-            alert("Not an array!");
         }
-    });
-
-    $.get("gminy", function(data){
-        if(data instanceof Array){
-            localStorage.setItem("gminy", JSON.stringify(data));
-        }
-        setTimeout(load_from_ls(), 1000);
-    });
-
-    $.get("users", function(data){
-        if(data instanceof Array){
-            localStorage.setItem("users", JSON.stringify(data));
-        }
-    });
-
-    $.get("wojewodztwa", function(data){
-        if(data instanceof Array){
-            localStorage.setItem("wojewodztwa", JSON.stringify(data));
-        }
-    });
-
-    $.get("rodzaje", function(data){
-        if(data instanceof Array){
-            localStorage.setItem("rodzaje", JSON.stringify(data));
-        }
+        $.get("gminy", function(data){
+            if(data instanceof Array){
+                localStorage.setItem("gminy", JSON.stringify(data));
+            }
+            $.get("users", function(data){
+                if(data instanceof Array){
+                    localStorage.setItem("users", JSON.stringify(data));
+                }
+                $.get("wojewodztwa", function(data){
+                    if(data instanceof Array){
+                        localStorage.setItem("wojewodztwa",
+                                JSON.stringify(data));
+                    }
+                    $.get("rodzaje", function(data){
+                        if(data instanceof Array){
+                            localStorage.setItem("rodzaje",
+                                    JSON.stringify(data));
+                        }
+                        load_from_ls();
+                    });
+                });
+            });
+        });
     });
 }
